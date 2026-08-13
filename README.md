@@ -145,6 +145,7 @@ rm -rf /tmp/dmg_staging
 ## 👨‍💻 Author
 
 Created with 💙 by **Girish Kumar Samal**
+- Instagram: [@just._.mickey___](https://www.instagram.com/just._.mickey___/)
 - GitHub: [@Girishkumarsamal08](https://github.com/Girishkumarsamal08)
 - Email: [girishkumarsamal08@gmail.com](mailto:girishkumarsamal08@gmail.com)
 
