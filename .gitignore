@@ -1,0 +1,9 @@
+# Build artifacts
+build/
+*.xcworkspace
+xcuserdata/
+DerivedData/
+.DS_Store
+
+# Logs
+*.log
