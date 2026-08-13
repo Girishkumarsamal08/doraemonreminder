@@ -79,15 +79,11 @@ doraemonreminder/
 ├── manual.html                      # Manual & FAQs page
 ├── vercel.json                      # Vercel deployment configuration
 ├── DoraemonReminder.dmg             # Pre-built macOS disk image installer
-├── doraemon.webp                    # Animated / static Doraemon asset
-├── done.mp4                         # Demo / installation guide video
 ├── images/                          # Web and media assets
 │   ├── doraemon.webp
+│   ├── doraemon face.jpg
+│   ├── doraemon name.png
 │   └── done.mp4
-├── website/                         # Website standalone mirror
-│   ├── index.html
-│   ├── manual.html
-│   └── DoraemonReminder.dmg
 └── DoraemonReminder/                # Native Swift macOS App Source
     ├── DoraemonReminder.xcodeproj   # Xcode Project file
     └── DoraemonReminder/

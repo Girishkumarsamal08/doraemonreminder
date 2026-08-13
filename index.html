@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doraemon Reminder — Magical reminders from your favorite robot cat</title>
-    <meta name="description" content="A free macOS menu bar reminder app featuring Doraemon. Set reminders and let Doraemon fly onto your screen to deliver them.">
+    <title>Doraeminder — Magical reminders from your favorite robot cat</title>
+    <meta name="description"
+        content="A free macOS menu bar reminder app featuring Doraemon. Set reminders and let Doraemon fly onto your screen to deliver them.">
     <meta property="og:title" content="Doraemon Reminder — Magical reminders from your favorite robot cat">
-    <meta property="og:description" content="A free macOS menu bar reminder app featuring Doraemon. Set reminders and let Doraemon fly onto your screen to deliver them.">
+    <meta property="og:description"
+        content="A free macOS menu bar reminder app featuring Doraemon. Set reminders and let Doraemon fly onto your screen to deliver them.">
     <meta property="og:type" content="website">
-    <link rel="icon" href="images/doraemon.webp" type="image/webp">
-    
+    <link rel="icon" href="images/doraemon_face.jpg" type="image/webp">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -81,7 +84,7 @@
             height: 550px;
             background-color: #1a1a1a;
             border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -103,8 +106,15 @@
 
         /* Doraemon floating animation */
         @keyframes doraemonFloat {
-            0%, 100% { transform: translateY(0px) rotate(-5deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
         }
 
         .doraemon-float {
@@ -113,8 +123,15 @@
 
         /* Gentle pulse for the CTA */
         @keyframes subtlePulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 150, 214, 0.3); }
-            50% { box-shadow: 0 0 20px 5px rgba(0, 150, 214, 0.15); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 150, 214, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 5px rgba(0, 150, 214, 0.15);
+            }
         }
 
         .cta-pulse {
@@ -123,33 +140,55 @@
 
         /* Slide up animation for sections */
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .animate-slide-up {
             animation: slideUp 0.8s ease-out forwards;
         }
 
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- Header -->
     <header class="w-full px-8 py-6 flex justify-between items-center z-50">
         <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
-            <img src="images/logo.png" alt="Doraemon" class="w-9 h-9 rounded-xl shadow-sm">
-            <span class="text-xl font-bold tracking-tight text-[#2c2b29]">Doraemon</span>
+            <img src="images/doraemon face.jpg" alt="Doraemon" class="w-9 h-9 rounded-xl shadow-sm">
+            <span class="text-xl font-bold tracking-tight text-[#2c2b29]"><img
+                    src="images/doraemon face.jpg"></img></span>
         </a>
-        
+
         <div class="flex items-center space-x-6">
-            <a href="manual.html" class="text-[0.95rem] font-bold text-[#2c2b29] hover:text-black transition">Manual & FAQs</a>
+            <a href="manual.html" class="text-[0.95rem] font-bold text-[#2c2b29] hover:text-black transition">Manual &
+                FAQs</a>
             <a href="DoraemonReminder.dmg" download="DoraemonReminder.dmg"
-               class="flex items-center bg-gray-100 hover:bg-gray-200 transition text-dark text-sm font-bold px-4 py-2 rounded-full">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.37 7.648c-.114.088-2.11 1.213-2.11 3.715 0 2.894 2.54 3.918 2.616 3.944-.011.062-.403 1.402-1.34 2.767-.834 1.201-1.706 2.4-3.032 2.4s-1.667-.77-3.198-.77c-1.492 0-2.022.796-3.235.796-1.214 0-2.06-1.112-3.033-2.477C4.911 16.42 4 13.93 4 11.566c0-3.791 2.465-5.802 4.891-5.802 1.29 0 2.364.847 3.173.847.77 0 1.972-.897 3.438-.897.556 0 2.553.05 3.867 1.934Zm-4.564-3.54c.607-.719 1.036-1.718 1.036-2.716 0-.138-.012-.279-.037-.392-.987.037-2.161.657-2.87 1.478-.555.632-1.074 1.63-1.074 2.643 0 .152.026.304.037.353.063.011.164.025.266.025.885 0 1.998-.593 2.642-1.39Z"></path></svg>
+                class="flex items-center bg-gray-100 hover:bg-gray-200 transition text-dark text-sm font-bold px-4 py-2 rounded-full">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M19.37 7.648c-.114.088-2.11 1.213-2.11 3.715 0 2.894 2.54 3.918 2.616 3.944-.011.062-.403 1.402-1.34 2.767-.834 1.201-1.706 2.4-3.032 2.4s-1.667-.77-3.198-.77c-1.492 0-2.022.796-3.235.796-1.214 0-2.06-1.112-3.033-2.477C4.911 16.42 4 13.93 4 11.566c0-3.791 2.465-5.802 4.891-5.802 1.29 0 2.364.847 3.173.847.77 0 1.972-.897 3.438-.897.556 0 2.553.05 3.867 1.934Zm-4.564-3.54c.607-.719 1.036-1.718 1.036-2.716 0-.138-.012-.279-.037-.392-.987.037-2.161.657-2.87 1.478-.555.632-1.074 1.63-1.074 2.643 0 .152.026.304.037.353.063.011.164.025.266.025.885 0 1.998-.593 2.642-1.39Z">
+                    </path>
+                </svg>
                 Download for Mac
             </a>
         </div>
@@ -158,28 +197,35 @@
     <!-- Hero Section -->
     <main class="w-full flex-shrink-0 flex flex-col items-center text-center mt-12 sm:mt-16 px-6 z-10">
         <div class="inline-block relative mb-10">
-            <h1 class="text-6xl sm:text-[5.5rem] leading-[1.05] font-[800] tracking-[-0.03em] text-[#2c2b29] relative z-20">
+            <h1
+                class="text-6xl sm:text-[5.5rem] leading-[1.05] font-[800] tracking-[-0.03em] text-[#2c2b29] relative z-20">
                 Magical <span class="highlight-box">reminders</span><br />
                 from your robot cat
             </h1>
-            <img src="images/doraemon.webp" alt="Doraemon" class="absolute w-[160px] sm:w-[190px] h-auto z-30 pointer-events-none doraemon-float" style="top: -65px; right: -180px; filter: drop-shadow(0 20px 30px rgba(0,150,214,0.3));">
+            <img src="images/doraemon.webp" alt="Doraemon"
+                class="absolute w-[160px] sm:w-[190px] h-auto z-30 pointer-events-none doraemon-float"
+                style="top: -65px; right: -180px; filter: drop-shadow(0 20px 30px rgba(0,150,214,0.3));">
         </div>
-        
+
         <div class="flex items-center space-x-4 flex-wrap justify-center gap-y-3">
             <!-- Main CTA -->
             <a href="DoraemonReminder.dmg" download="DoraemonReminder.dmg"
-               class="cta-pulse flex items-center bg-[#0096D6] hover:bg-[#0077AB] shadow-xl text-white text-lg font-bold px-6 py-3.5 rounded-[1rem] transition transform hover:scale-[1.02]">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.37 7.648c-.114.088-2.11 1.213-2.11 3.715 0 2.894 2.54 3.918 2.616 3.944-.011.062-.403 1.402-1.34 2.767-.834 1.201-1.706 2.4-3.032 2.4s-1.667-.77-3.198-.77c-1.492 0-2.022.796-3.235.796-1.214 0-2.06-1.112-3.033-2.477C4.911 16.42 4 13.93 4 11.566c0-3.791 2.465-5.802 4.891-5.802 1.29 0 2.364.847 3.173.847.77 0 1.972-.897 3.438-.897.556 0 2.553.05 3.867 1.934Zm-4.564-3.54c.607-.719 1.036-1.718 1.036-2.716 0-.138-.012-.279-.037-.392-.987.037-2.161.657-2.87 1.478-.555.632-1.074 1.63-1.074 2.643 0 .152.026.304.037.353.063.011.164.025.266.025.885 0 1.998-.593 2.642-1.39Z"></path></svg>
+                class="cta-pulse flex items-center bg-[#0096D6] hover:bg-[#0077AB] shadow-xl text-white text-lg font-bold px-6 py-3.5 rounded-[1rem] transition transform hover:scale-[1.02]">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M19.37 7.648c-.114.088-2.11 1.213-2.11 3.715 0 2.894 2.54 3.918 2.616 3.944-.011.062-.403 1.402-1.34 2.767-.834 1.201-1.706 2.4-3.032 2.4s-1.667-.77-3.198-.77c-1.492 0-2.022.796-3.235.796-1.214 0-2.06-1.112-3.033-2.477C4.911 16.42 4 13.93 4 11.566c0-3.791 2.465-5.802 4.891-5.802 1.29 0 2.364.847 3.173.847.77 0 1.972-.897 3.438-.897.556 0 2.553.05 3.867 1.934Zm-4.564-3.54c.607-.719 1.036-1.718 1.036-2.716 0-.138-.012-.279-.037-.392-.987.037-2.161.657-2.87 1.478-.555.632-1.074 1.63-1.074 2.643 0 .152.026.304.037.353.063.011.164.025.266.025.885 0 1.998-.593 2.642-1.39Z">
+                    </path>
+                </svg>
                 Download for Mac
             </a>
 
             <!-- Secondary Info -->
             <div class="flex items-center bg-gray-100 px-4 py-3.5 rounded-[1rem]">
-                <img src="images/logo.png" class="w-5 h-5 rounded mr-2 opacity-90" alt="Logo" />
+                <img src="images/doraemon face.jpg" class="w-5 h-5 rounded mr-2 opacity-90" alt="Logo" />
                 <span class="text-sm font-bold text-gray-800 mr-3">100% Free</span>
                 <span class="bg-[#0096D6] text-white text-xs font-bold px-2 py-0.5 rounded">v1.0</span>
             </div>
-            
+
             <!-- Badges -->
             <div class="hidden sm:flex flex-col ml-4 text-left border-l-2 border-gray-200 pl-4 py-1">
                 <span class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-widest">Built for</span>
@@ -192,13 +238,14 @@
     <div class="mockup-container">
         <div class="mockup">
             <div class="abstract-bg"></div>
-            
+
             <!-- App Preview UI Overlay -->
             <div class="absolute inset-0 w-full h-full p-8 flex items-center justify-center z-10">
-                
+
                 <!-- Doraemon Popup Replica (Glassmorphism) -->
-                <div class="w-80 bg-[#1e1c1a]/70 backdrop-blur-3xl rounded-2xl p-5 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col">
-                    
+                <div
+                    class="w-80 bg-[#1e1c1a]/70 backdrop-blur-3xl rounded-2xl p-5 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col">
+
                     <!-- Header -->
                     <div class="flex items-center mb-4">
                         <div>
@@ -206,62 +253,77 @@
                             <p class="text-[11px] font-medium text-white/50">Set a time, Doraemon does the rest.</p>
                         </div>
                     </div>
-                    
+
                     <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4"></div>
-                    
+
                     <!-- Message Input -->
                     <div class="mb-4">
-                        <label class="block text-[10px] font-bold text-white/40 mb-1.5 uppercase tracking-widest">Message</label>
+                        <label
+                            class="block text-[10px] font-bold text-white/40 mb-1.5 uppercase tracking-widest">Message</label>
                         <div class="w-full bg-black/40 border border-white/5 rounded-lg px-3 py-2.5 shadow-inner">
                             <span class="text-sm font-medium text-white/90">Time to take a break! ☕</span>
                         </div>
                     </div>
-                    
+
                     <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4"></div>
-                    
+
                     <!-- Schedule -->
                     <div class="mb-5">
-                        <label class="block text-[10px] font-bold text-white/40 mb-1.5 uppercase tracking-widest">Schedule</label>
-                        
+                        <label
+                            class="block text-[10px] font-bold text-white/40 mb-1.5 uppercase tracking-widest">Schedule</label>
+
                         <!-- Tabs -->
                         <div class="flex bg-black/40 rounded-lg p-1 mb-3 border border-white/5 shadow-inner">
-                            <div class="flex-1 bg-white/10 shadow-sm text-white text-xs font-semibold text-center py-1.5 rounded-md border border-white/5">At Time</div>
+                            <div
+                                class="flex-1 bg-white/10 shadow-sm text-white text-xs font-semibold text-center py-1.5 rounded-md border border-white/5">
+                                At Time</div>
                             <div class="flex-1 text-white/40 text-xs font-semibold text-center py-1.5">Repeat</div>
                         </div>
-                        
+
                         <!-- Time Input -->
                         <div class="flex items-center justify-between px-1">
                             <div class="flex space-x-2">
-                                <div class="bg-black/50 border border-white/10 rounded-lg w-12 h-11 flex items-center justify-center shadow-inner relative overflow-hidden">
+                                <div
+                                    class="bg-black/50 border border-white/10 rounded-lg w-12 h-11 flex items-center justify-center shadow-inner relative overflow-hidden">
                                     <span class="text-white font-mono text-lg font-semibold relative z-10">08</span>
                                     <div class="absolute bottom-0 w-full h-1/2 bg-white/5 z-0"></div>
                                 </div>
                                 <span class="text-white/30 font-bold self-center text-lg">:</span>
-                                <div class="bg-black/50 border border-white/10 rounded-lg w-12 h-11 flex items-center justify-center shadow-inner relative overflow-hidden">
+                                <div
+                                    class="bg-black/50 border border-white/10 rounded-lg w-12 h-11 flex items-center justify-center shadow-inner relative overflow-hidden">
                                     <span class="text-white font-mono text-lg font-semibold relative z-10">00</span>
                                     <div class="absolute bottom-0 w-full h-1/2 bg-white/5 z-0"></div>
                                 </div>
                             </div>
-                            <div class="flex flex-col bg-black/50 border border-white/10 rounded-lg overflow-hidden text-[10px] font-bold shadow-inner">
+                            <div
+                                class="flex flex-col bg-black/50 border border-white/10 rounded-lg overflow-hidden text-[10px] font-bold shadow-inner">
                                 <div class="bg-white/15 text-white px-2.5 py-1 text-center">AM</div>
-                                <div class="text-white/30 px-2.5 py-1 text-center hover:bg-white/5 cursor-pointer">PM</div>
+                                <div class="text-white/30 px-2.5 py-1 text-center hover:bg-white/5 cursor-pointer">PM
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Status -->
                     <div class="flex items-center justify-center space-x-2 mb-4">
                         <div class="w-1.5 h-1.5 rounded-full bg-gray-500"></div>
-                        <span class="text-[10px] text-white/40 font-semibold uppercase tracking-wider">No reminder set</span>
+                        <span class="text-[10px] text-white/40 font-semibold uppercase tracking-wider">No reminder
+                            set</span>
                     </div>
 
                     <!-- Button -->
-                    <button id="mockup-set-btn" class="w-full bg-gradient-to-b from-[#0096D6] to-[#0077AB] hover:from-[#00a8f0] hover:to-[#0096D6] border border-[#00a8f0]/30 text-white text-sm font-bold py-2.5 rounded-xl shadow-[0_0_15px_rgba(0,150,214,0.4)] flex justify-center items-center transition-all">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <button id="mockup-set-btn"
+                        class="w-full bg-gradient-to-b from-[#0096D6] to-[#0077AB] hover:from-[#00a8f0] hover:to-[#0096D6] border border-[#00a8f0]/30 text-white text-sm font-bold py-2.5 rounded-xl shadow-[0_0_15px_rgba(0,150,214,0.4)] flex justify-center items-center transition-all">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
                         Set Reminder
                     </button>
-                    
-                    <button id="mockup-test-btn" class="w-full mt-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 text-[11px] font-bold py-2 rounded-lg transition-all" onclick="testNotification()">
+
+                    <button id="mockup-test-btn"
+                        class="w-full mt-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 text-[11px] font-bold py-2 rounded-lg transition-all"
+                        onclick="testNotification()">
                         Test Now
                     </button>
 
@@ -274,28 +336,37 @@
     <section class="w-full flex flex-col items-center justify-center pt-24 pb-20 px-6 relative z-10">
         <h2 class="text-4xl sm:text-5xl font-[800] tracking-tight text-[#2c2b29] mb-16 text-center">How to use it</h2>
         <div class="flex flex-col sm:flex-row max-w-4xl w-full gap-12 sm:gap-6 justify-between items-start">
-            
+
             <!-- Step 1 -->
             <div class="flex flex-col items-center text-center flex-1">
-                <div class="w-14 h-14 rounded-2xl bg-[#2c2b29] text-white flex items-center justify-center text-xl font-bold mb-6 shadow-xl shadow-black/10">1</div>
+                <div
+                    class="w-14 h-14 rounded-2xl bg-[#2c2b29] text-white flex items-center justify-center text-xl font-bold mb-6 shadow-xl shadow-black/10">
+                    1</div>
                 <h3 class="text-xl font-bold text-[#2c2b29] mb-3">Install App</h3>
-                <p class="text-gray-500 text-[0.95rem] font-medium leading-relaxed max-w-[220px]">Download the free Mac app and open it directly from your menu bar.</p>
+                <p class="text-gray-500 text-[0.95rem] font-medium leading-relaxed max-w-[220px]">Download the free Mac
+                    app and open it directly from your menu bar.</p>
             </div>
-            
+
             <!-- Step 2 -->
             <div class="flex flex-col items-center text-center flex-1">
-                <div class="w-14 h-14 rounded-2xl bg-[#2c2b29] text-white flex items-center justify-center text-xl font-bold mb-6 shadow-xl shadow-black/10">2</div>
+                <div
+                    class="w-14 h-14 rounded-2xl bg-[#2c2b29] text-white flex items-center justify-center text-xl font-bold mb-6 shadow-xl shadow-black/10">
+                    2</div>
                 <h3 class="text-xl font-bold text-[#2c2b29] mb-3">Set Reminder</h3>
-                <p class="text-gray-500 text-[0.95rem] font-medium leading-relaxed max-w-[220px]">Type your message and set the exact time you want to be reminded.</p>
+                <p class="text-gray-500 text-[0.95rem] font-medium leading-relaxed max-w-[220px]">Type your message and
+                    set the exact time you want to be reminded.</p>
             </div>
-            
+
             <!-- Step 3 -->
             <div class="flex flex-col items-center text-center flex-1">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-b from-[#0096D6] to-[#0077AB] text-white flex items-center justify-center text-xl font-bold mb-6 shadow-xl shadow-[#0096D6]/20">3</div>
+                <div
+                    class="w-14 h-14 rounded-2xl bg-gradient-to-b from-[#0096D6] to-[#0077AB] text-white flex items-center justify-center text-xl font-bold mb-6 shadow-xl shadow-[#0096D6]/20">
+                    3</div>
                 <h3 class="text-xl font-bold text-[#2c2b29] mb-3">Stay on Track</h3>
-                <p class="text-gray-500 text-[0.95rem] font-medium leading-relaxed max-w-[220px]">Doraemon flies onto your screen exactly when you need him.</p>
+                <p class="text-gray-500 text-[0.95rem] font-medium leading-relaxed max-w-[220px]">Doraemon flies onto
+                    your screen exactly when you need him.</p>
             </div>
-            
+
         </div>
     </section>
 
@@ -303,9 +374,8 @@
     <div class="w-full max-w-4xl mx-auto px-6 pb-12 z-10 relative flex flex-col items-center">
         <h3 class="text-3xl font-[800] tracking-tight text-[#2c2b29] mb-6">Installation Video</h3>
         <div class="bg-black/5 p-2 sm:p-3 rounded-3xl w-full max-w-3xl shadow-sm border border-gray-100">
-            <video 
-                class="w-full h-auto rounded-2xl shadow-lg border border-black/10" 
-                autoplay loop muted playsinline controls>
+            <video class="w-full h-auto rounded-2xl shadow-lg border border-black/10" autoplay loop muted playsinline
+                controls>
                 <source src="images/done.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -314,17 +384,30 @@
 
     <!-- Installation Security Note -->
     <div class="w-full max-w-3xl mx-auto px-6 pb-16 z-10 relative">
-        <div class="bg-sky-50 border border-sky-100 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-5 transition hover:shadow-md">
+        <div
+            class="bg-sky-50 border border-sky-100 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-5 transition hover:shadow-md">
             <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                    </path>
+                </svg>
             </div>
             <div>
                 <h4 class="text-base font-bold text-sky-900 mb-1">Getting a Mac Security Warning?</h4>
                 <p class="text-[0.9rem] text-sky-800 leading-relaxed font-medium mb-3">
-                    If Apple blocks the app from opening, simply go to your Mac's <strong>System Settings > Privacy & Security</strong>, scroll down to the Security section, and click <strong>Open Anyway</strong> to bypass it.
+                    If Apple blocks the app from opening, simply go to your Mac's <strong>System Settings > Privacy &
+                        Security</strong>, scroll down to the Security section, and click <strong>Open Anyway</strong>
+                    to bypass it.
                 </p>
-                <a href="https://www.instagram.com/just._.mickey___/" target="_blank" class="inline-flex items-center text-[0.9rem] text-sky-900 font-bold hover:text-sky-700 transition">
-                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <a href="https://www.instagram.com/just._.mickey___/" target="_blank"
+                    class="inline-flex items-center text-[0.9rem] text-sky-900 font-bold hover:text-sky-700 transition">
+                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
                     Facing any problems? Reach out to me on Instagram (@just._.mickey___)
                 </a>
             </div>
@@ -335,14 +418,29 @@
     <footer class="w-full flex flex-col items-center justify-center space-y-6 pt-16 pb-20 bg-[#fcfaf6]">
         <p class="text-3xl sm:text-4xl font-[800] tracking-tight text-[#2c2b29]">Let me know your feedback</p>
         <div class="flex space-x-8">
-            <a href="https://www.instagram.com/just._.mickey___/" target="_blank" class="text-[#2c2b29] hover:text-[#0096D6] transition transform hover:scale-110" title="Instagram">
-                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <a href="https://www.instagram.com/just._.mickey___/" target="_blank"
+                class="text-[#2c2b29] hover:text-[#0096D6] transition transform hover:scale-110" title="Instagram">
+                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
             </a>
-            <a href="mailto:girishkumarsamal08@gmail.com" class="text-[#2c2b29] hover:text-[#0096D6] transition transform hover:scale-110" title="Email">
-                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:girishkumarsamal08@gmail.com"
+                class="text-[#2c2b29] hover:text-[#0096D6] transition transform hover:scale-110" title="Email">
+                <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
             </a>
-            <a href="https://github.com/Girishkumarsamal08" target="_blank" class="text-[#2c2b29] hover:text-[#0096D6] transition transform hover:scale-110" title="GitHub">
-                <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <a href="https://github.com/Girishkumarsamal08" target="_blank"
+                class="text-[#2c2b29] hover:text-[#0096D6] transition transform hover:scale-110" title="GitHub">
+                <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
             </a>
         </div>
         <p class="text-sm text-gray-400 font-medium">Made with 💙 by Girish Kumar Samal</p>
@@ -351,7 +449,7 @@
     <script>
         function testNotification() {
             if ('Notification' in window) {
-                Notification.requestPermission().then(function(permission) {
+                Notification.requestPermission().then(function (permission) {
                     if (permission === 'granted') {
                         new Notification('Doraemon Reminder 🔔', {
                             body: 'Time to take a break! ☕',
@@ -364,4 +462,5 @@
     </script>
 
 </body>
+
 </html>
