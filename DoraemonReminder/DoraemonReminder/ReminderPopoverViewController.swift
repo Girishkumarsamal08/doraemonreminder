@@ -44,154 +44,153 @@ class ReminderPopoverViewController: NSViewController {
     private func setupUI() {
         let contentView = self.view
         contentView.wantsLayer = true
+        contentView.layer?.backgroundColor = NSColor(red: 0.09, green: 0.10, blue: 0.14, alpha: 1.0).cgColor
         
-        var yOffset: CGFloat = 420
+        var yOffset: CGFloat = 415
         
-        // ── Title ──
-        let titleLabel = makeLabel("Doraemon Reminder", size: 16, bold: true)
-        titleLabel.frame = NSRect(x: 20, y: yOffset, width: 280, height: 24)
-        contentView.addSubview(titleLabel)
-        yOffset -= 18
-        
-        let subtitleLabel = makeLabel("Set a time, Doraemon does the rest.", size: 11, bold: false)
-        subtitleLabel.textColor = .secondaryLabelColor
-        subtitleLabel.frame = NSRect(x: 20, y: yOffset, width: 280, height: 16)
-        contentView.addSubview(subtitleLabel)
-        yOffset -= 30
-        
-        // ── Separator ──
-        addSeparator(at: yOffset, in: contentView)
-        yOffset -= 16
-        
-        // ── Message ──
-        let messageSectionLabel = makeSectionLabel("Message")
-        messageSectionLabel.frame = NSRect(x: 20, y: yOffset, width: 280, height: 14)
-        contentView.addSubview(messageSectionLabel)
-        yOffset -= 28
-        
-        messageTextField = NSTextField(frame: NSRect(x: 20, y: yOffset, width: 280, height: 28))
-        messageTextField.placeholderString = "Reminder"
-        messageTextField.font = NSFont.systemFont(ofSize: 13)
-        messageTextField.bezelStyle = .roundedBezel
-        messageTextField.focusRingType = .exterior
-        contentView.addSubview(messageTextField)
+        // ── Header Title ──
+        let titleRow = NSView(frame: NSRect(x: 20, y: yOffset, width: 280, height: 28))
+        let titleLabel = makeLabel("Doraemon Reminder", size: 16, bold: true, color: .white)
+        titleLabel.frame = NSRect(x: 0, y: 2, width: 250, height: 24)
+        titleRow.addSubview(titleLabel)
+        contentView.addSubview(titleRow)
         yOffset -= 20
         
-        // ── Separator ──
-        addSeparator(at: yOffset, in: contentView)
-        yOffset -= 16
+        // Subtitle divider line
+        let divider1 = makeDivider(y: yOffset)
+        contentView.addSubview(divider1)
+        yOffset -= 18
         
-        // ── Schedule ──
-        let scheduleSectionLabel = makeSectionLabel("Schedule")
-        scheduleSectionLabel.frame = NSRect(x: 20, y: yOffset, width: 280, height: 14)
-        contentView.addSubview(scheduleSectionLabel)
-        yOffset -= 34
+        // ── Message Section ──
+        let msgHeader = makeSectionHeader("💬 Message")
+        msgHeader.frame = NSRect(x: 20, y: yOffset, width: 280, height: 16)
+        contentView.addSubview(msgHeader)
+        yOffset -= 32
         
-        // At Time / Repeat Segmented Control
+        messageTextField = NSTextField(frame: NSRect(x: 20, y: yOffset, width: 280, height: 32))
+        messageTextField.placeholderString = "Reminder"
+        messageTextField.stringValue = ""
+        messageTextField.font = NSFont.systemFont(ofSize: 13, weight: .medium)
+        messageTextField.textColor = .white
+        messageTextField.wantsLayer = true
+        messageTextField.layer?.backgroundColor = NSColor(red: 0.13, green: 0.15, blue: 0.20, alpha: 1.0).cgColor
+        messageTextField.layer?.borderColor = NSColor(red: 0.0, green: 0.59, blue: 0.84, alpha: 0.8).cgColor
+        messageTextField.layer?.borderWidth = 1.5
+        messageTextField.layer?.cornerRadius = 8
+        messageTextField.isBordered = false
+        messageTextField.focusRingType = .none
+        contentView.addSubview(messageTextField)
+        yOffset -= 28
+        
+        // ── Schedule Section ──
+        let scheduleHeader = makeSectionHeader("🕒 Schedule")
+        scheduleHeader.frame = NSRect(x: 20, y: yOffset, width: 280, height: 16)
+        contentView.addSubview(scheduleHeader)
+        yOffset -= 38
+        
+        // At Time / Repeat Toggle Switcher
         scheduleSegment = NSSegmentedControl(labels: ["At Time", "Repeat"], trackingMode: .selectOne, target: self, action: #selector(scheduleTypeChanged))
         scheduleSegment.selectedSegment = 0
-        scheduleSegment.frame = NSRect(x: 20, y: yOffset, width: 280, height: 28)
+        scheduleSegment.frame = NSRect(x: 60, y: yOffset, width: 200, height: 28)
+        scheduleSegment.wantsLayer = true
+        scheduleSegment.segmentStyle = .capsule
         contentView.addSubview(scheduleSegment)
-        yOffset -= 40
+        yOffset -= 48
         
-        // Time picker row
-        let timeRow = NSView(frame: NSRect(x: 20, y: yOffset, width: 280, height: 36))
+        // ── Time Input Card ──
+        let timeCard = NSView(frame: NSRect(x: 20, y: yOffset, width: 280, height: 44))
+        timeCard.wantsLayer = true
+        timeCard.layer?.backgroundColor = NSColor(red: 0.13, green: 0.15, blue: 0.20, alpha: 0.8).cgColor
+        timeCard.layer?.cornerRadius = 10
+        timeCard.layer?.borderColor = NSColor(white: 1.0, alpha: 0.06).cgColor
+        timeCard.layer?.borderWidth = 1
         
-        // Hour field
-        hourField = NSTextField(frame: NSRect(x: 0, y: 0, width: 50, height: 36))
+        // Hour Box
+        hourField = NSTextField(frame: NSRect(x: 12, y: 6, width: 44, height: 32))
         hourField.stringValue = "08"
-        hourField.font = NSFont.monospacedDigitSystemFont(ofSize: 20, weight: .semibold)
+        hourField.font = NSFont.monospacedDigitSystemFont(ofSize: 18, weight: .bold)
+        hourField.textColor = .white
         hourField.alignment = .center
-        hourField.bezelStyle = .roundedBezel
-        timeRow.addSubview(hourField)
+        hourField.isBordered = false
+        hourField.focusRingType = .none
+        hourField.wantsLayer = true
+        hourField.layer?.backgroundColor = NSColor(red: 0.09, green: 0.10, blue: 0.14, alpha: 1.0).cgColor
+        hourField.layer?.cornerRadius = 6
+        timeCard.addSubview(hourField)
         
-        let colonLabel = makeLabel(":", size: 20, bold: true)
-        colonLabel.frame = NSRect(x: 55, y: 0, width: 15, height: 36)
-        colonLabel.alignment = .center
-        colonLabel.textColor = .tertiaryLabelColor
-        timeRow.addSubview(colonLabel)
+        let colon = makeLabel(":", size: 18, bold: true, color: NSColor(white: 1.0, alpha: 0.5))
+        colon.frame = NSRect(x: 58, y: 8, width: 10, height: 28)
+        colon.alignment = .center
+        timeCard.addSubview(colon)
         
-        // Minute field
-        minuteField = NSTextField(frame: NSRect(x: 75, y: 0, width: 50, height: 36))
+        // Minute Box
+        minuteField = NSTextField(frame: NSRect(x: 70, y: 6, width: 44, height: 32))
         minuteField.stringValue = "00"
-        minuteField.font = NSFont.monospacedDigitSystemFont(ofSize: 20, weight: .semibold)
+        minuteField.font = NSFont.monospacedDigitSystemFont(ofSize: 18, weight: .bold)
+        minuteField.textColor = .white
         minuteField.alignment = .center
-        minuteField.bezelStyle = .roundedBezel
-        timeRow.addSubview(minuteField)
+        minuteField.isBordered = false
+        minuteField.focusRingType = .none
+        minuteField.wantsLayer = true
+        minuteField.layer?.backgroundColor = NSColor(red: 0.09, green: 0.10, blue: 0.14, alpha: 1.0).cgColor
+        minuteField.layer?.cornerRadius = 6
+        timeCard.addSubview(minuteField)
         
-        // AM/PM Segmented Control
+        // AM / PM Toggle
         amPmSegment = NSSegmentedControl(labels: ["AM", "PM"], trackingMode: .selectOne, target: nil, action: nil)
         amPmSegment.selectedSegment = 0
-        amPmSegment.frame = NSRect(x: 200, y: 2, width: 80, height: 32)
-        amPmSegment.font = NSFont.systemFont(ofSize: 10, weight: .bold)
-        timeRow.addSubview(amPmSegment)
+        amPmSegment.frame = NSRect(x: 180, y: 8, width: 88, height: 28)
+        amPmSegment.segmentStyle = .capsule
+        timeCard.addSubview(amPmSegment)
         
-        contentView.addSubview(timeRow)
-        yOffset -= 10
+        contentView.addSubview(timeCard)
+        yOffset -= 8
         
-        // Repeat interval popup (hidden by default)
-        repeatIntervalPopup = NSPopUpButton(frame: NSRect(x: 20, y: yOffset - 30, width: 280, height: 28))
+        // Repeat interval popup (hidden until Repeat selected)
+        repeatIntervalPopup = NSPopUpButton(frame: NSRect(x: 20, y: yOffset - 32, width: 280, height: 28))
         repeatIntervalPopup.addItems(withTitles: ["Every 15 minutes", "Every 30 minutes", "Every 1 hour", "Every 2 hours"])
         repeatIntervalPopup.isHidden = true
         contentView.addSubview(repeatIntervalPopup)
+        yOffset -= 32
         
-        yOffset -= 30
+        // ── Upcoming Section Divider ──
+        let divider2 = makeDivider(y: yOffset)
+        contentView.addSubview(divider2)
+        yOffset -= 24
         
-        // ── Upcoming Section ──
-        upcomingDisclosure = NSButton(frame: NSRect(x: 14, y: yOffset, width: 290, height: 28))
-        upcomingDisclosure.title = "  ⏳ Upcoming"
+        // Upcoming disclosure toggle
+        upcomingDisclosure = NSButton(frame: NSRect(x: 20, y: yOffset, width: 280, height: 22))
+        upcomingDisclosure.title = "🔄 Upcoming"
         upcomingDisclosure.bezelStyle = .inline
-        upcomingDisclosure.setButtonType(.momentaryPushIn)
         upcomingDisclosure.isBordered = false
-        upcomingDisclosure.font = NSFont.systemFont(ofSize: 12, weight: .semibold)
+        upcomingDisclosure.font = NSFont.systemFont(ofSize: 13, weight: .semibold)
+        upcomingDisclosure.contentTintColor = .white
         upcomingDisclosure.target = self
         upcomingDisclosure.action = #selector(toggleUpcoming)
         upcomingDisclosure.alignment = .left
         contentView.addSubview(upcomingDisclosure)
-        yOffset -= 6
+        yOffset -= 4
         
-        upcomingContainer = NSView(frame: NSRect(x: 20, y: yOffset - 30, width: 280, height: 30))
+        upcomingContainer = NSView(frame: NSRect(x: 20, y: yOffset - 26, width: 280, height: 26))
         upcomingContainer.isHidden = true
         
-        upcomingLabel = makeLabel("No reminders scheduled", size: 11, bold: false)
-        upcomingLabel.textColor = .secondaryLabelColor
-        upcomingLabel.frame = NSRect(x: 0, y: 5, width: 280, height: 20)
+        upcomingLabel = makeLabel("No reminders scheduled", size: 11, bold: false, color: NSColor(white: 1.0, alpha: 0.6))
+        upcomingLabel.frame = NSRect(x: 4, y: 3, width: 272, height: 20)
         upcomingContainer.addSubview(upcomingLabel)
         contentView.addSubview(upcomingContainer)
-        yOffset -= 10
+        yOffset -= 30
         
         // ── Launch at Login ──
         launchAtLoginCheckbox = NSButton(checkboxWithTitle: "Launch at Login", target: self, action: #selector(toggleLaunchAtLogin))
         launchAtLoginCheckbox.frame = NSRect(x: 20, y: yOffset, width: 280, height: 20)
-        launchAtLoginCheckbox.font = NSFont.systemFont(ofSize: 12)
+        launchAtLoginCheckbox.font = NSFont.systemFont(ofSize: 12, weight: .medium)
+        launchAtLoginCheckbox.contentTintColor = NSColor(white: 1.0, alpha: 0.85)
         contentView.addSubview(launchAtLoginCheckbox)
-        yOffset -= 20
+        yOffset -= 40
         
-        // ── Status ──
-        let statusRow = NSView(frame: NSRect(x: 20, y: yOffset, width: 280, height: 16))
-        
-        statusDot = NSView(frame: NSRect(x: 120, y: 6, width: 6, height: 6))
-        statusDot.wantsLayer = true
-        statusDot.layer?.backgroundColor = NSColor.systemGray.cgColor
-        statusDot.layer?.cornerRadius = 3
-        statusRow.addSubview(statusDot)
-        
-        statusLabel = makeLabel("No reminder set", size: 10, bold: true)
-        statusLabel.textColor = .tertiaryLabelColor
-        statusLabel.frame = NSRect(x: 130, y: 0, width: 150, height: 16)
-        statusRow.addSubview(statusLabel)
-        
-        contentView.addSubview(statusRow)
-        yOffset -= 24
-        
-        // ── Buttons row ──
-        let buttonWidth: CGFloat = 80
-        let spacing: CGFloat = 10
-        let totalWidth = buttonWidth * 3 + spacing * 2
-        let startX = (320 - totalWidth) / 2
-        
-        // Test button
-        testButton = NSButton(frame: NSRect(x: startX, y: yOffset, width: buttonWidth, height: 30))
+        // ── Bottom Action Buttons ──
+        // Test Button
+        testButton = NSButton(frame: NSRect(x: 20, y: yOffset, width: 64, height: 32))
         testButton.title = "Test"
         testButton.bezelStyle = .rounded
         testButton.font = NSFont.systemFont(ofSize: 12, weight: .medium)
@@ -199,8 +198,8 @@ class ReminderPopoverViewController: NSViewController {
         testButton.action = #selector(testReminder)
         contentView.addSubview(testButton)
         
-        // Clear button
-        clearButton = NSButton(frame: NSRect(x: startX + buttonWidth + spacing, y: yOffset, width: buttonWidth, height: 30))
+        // Clear All Button
+        clearButton = NSButton(frame: NSRect(x: 90, y: yOffset, width: 76, height: 32))
         clearButton.title = "Clear All"
         clearButton.bezelStyle = .rounded
         clearButton.font = NSFont.systemFont(ofSize: 12, weight: .medium)
@@ -208,57 +207,59 @@ class ReminderPopoverViewController: NSViewController {
         clearButton.action = #selector(clearReminders)
         contentView.addSubview(clearButton)
         
-        // Set Reminder button (styled)
-        setReminderButton = NSButton(frame: NSRect(x: startX + (buttonWidth + spacing) * 2, y: yOffset, width: buttonWidth, height: 30))
+        // Set Reminder (Red button matching screenshot)
+        setReminderButton = NSButton(frame: NSRect(x: 172, y: yOffset, width: 128, height: 32))
         setReminderButton.title = "Set Reminder"
-        setReminderButton.bezelStyle = .rounded
-        setReminderButton.font = NSFont.systemFont(ofSize: 11, weight: .bold)
+        setReminderButton.bezelStyle = .regularSquare
+        setReminderButton.font = NSFont.systemFont(ofSize: 12, weight: .bold)
         setReminderButton.contentTintColor = .white
         setReminderButton.wantsLayer = true
-        setReminderButton.layer?.backgroundColor = NSColor(red: 0, green: 0.59, blue: 0.84, alpha: 1).cgColor
-        setReminderButton.layer?.cornerRadius = 6
+        setReminderButton.layer?.backgroundColor = NSColor(red: 0.88, green: 0.11, blue: 0.15, alpha: 1.0).cgColor
+        setReminderButton.layer?.cornerRadius = 8
         setReminderButton.isBordered = false
         setReminderButton.target = self
         setReminderButton.action = #selector(setReminder)
         contentView.addSubview(setReminderButton)
-        yOffset -= 36
+        yOffset -= 32
         
-        // ── Quit ──
-        quitButton = NSButton(frame: NSRect(x: 0, y: yOffset, width: 320, height: 24))
+        // ── Quit Button ──
+        quitButton = NSButton(frame: NSRect(x: 0, y: yOffset, width: 320, height: 22))
         quitButton.title = "Quit"
         quitButton.bezelStyle = .inline
         quitButton.isBordered = false
         quitButton.font = NSFont.systemFont(ofSize: 12, weight: .medium)
-        quitButton.contentTintColor = .secondaryLabelColor
+        quitButton.contentTintColor = NSColor(white: 1.0, alpha: 0.45)
         quitButton.target = self
         quitButton.action = #selector(quitApp)
         contentView.addSubview(quitButton)
     }
     
     // MARK: - Helper UI Builders
-    private func makeLabel(_ text: String, size: CGFloat, bold: Bool) -> NSTextField {
+    private func makeLabel(_ text: String, size: CGFloat, bold: Bool, color: NSColor = .white) -> NSTextField {
         let label = NSTextField(labelWithString: text)
         label.font = bold ? NSFont.systemFont(ofSize: size, weight: .bold) : NSFont.systemFont(ofSize: size)
+        label.textColor = color
         label.isEditable = false
         label.isBordered = false
         label.backgroundColor = .clear
         return label
     }
     
-    private func makeSectionLabel(_ text: String) -> NSTextField {
-        let label = NSTextField(labelWithString: text.uppercased())
-        label.font = NSFont.systemFont(ofSize: 9, weight: .bold)
-        label.textColor = .tertiaryLabelColor
+    private func makeSectionHeader(_ text: String) -> NSTextField {
+        let label = NSTextField(labelWithString: text)
+        label.font = NSFont.systemFont(ofSize: 12, weight: .semibold)
+        label.textColor = NSColor(white: 1.0, alpha: 0.7)
         label.isEditable = false
         label.isBordered = false
         label.backgroundColor = .clear
         return label
     }
     
-    private func addSeparator(at y: CGFloat, in parent: NSView) {
-        let sep = NSBox(frame: NSRect(x: 20, y: y, width: 280, height: 1))
-        sep.boxType = .separator
-        parent.addSubview(sep)
+    private func makeDivider(y: CGFloat) -> NSView {
+        let line = NSView(frame: NSRect(x: 20, y: y, width: 280, height: 1))
+        line.wantsLayer = true
+        line.layer?.backgroundColor = NSColor(white: 1.0, alpha: 0.08).cgColor
+        return line
     }
     
     // MARK: - Actions

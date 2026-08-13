@@ -11,21 +11,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - App Lifecycle
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Hide dock icon
+        // Hide dock icon and run as menu bar accessory
         NSApp.setActivationPolicy(.accessory)
         
         // Setup status bar item
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         
         if let button = statusItem.button {
-            // Use the menu bar icon from assets, or fallback to emoji
-            if let menuIcon = NSImage(named: "menuBarIcon") {
-                menuIcon.isTemplate = true
-                menuIcon.size = NSSize(width: 18, height: 18)
-                button.image = menuIcon
+            button.toolTip = "Doraemon Reminder"
+            
+            // Try loading menu bar bell icon from asset catalog or resource bundle
+            var iconImage: NSImage?
+            if let img = NSImage(named: "menuBarIcon") {
+                iconImage = img
+            } else if let resourcePath = Bundle.main.resourcePath {
+                let paths = [
+                    "\(resourcePath)/menuBarIcon.png",
+                    "\(resourcePath)/menuBarIcon@2x.png",
+                    "\(resourcePath)/doraemon_bell.png"
+                ]
+                for path in paths {
+                    if let img = NSImage(contentsOfFile: path) {
+                        iconImage = img
+                        break
+                    }
+                }
+            }
+            
+            if let icon = iconImage {
+                icon.isTemplate = true
+                icon.size = NSSize(width: 18, height: 18)
+                button.image = icon
             } else {
                 button.title = "🔔"
             }
+            
             button.action = #selector(togglePopover)
             button.target = self
         }
@@ -33,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Setup popover
         popoverViewController = ReminderPopoverViewController()
         popover = NSPopover()
-        popover.contentSize = NSSize(width: 320, height: 460)
+        popover.contentSize = NSSize(width: 320, height: 450)
         popover.behavior = .transient
         popover.contentViewController = popoverViewController
         popover.animates = true
@@ -42,6 +62,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] _ in
             if let popover = self?.popover, popover.isShown {
                 popover.performClose(nil)
+            }
+        }
+        
+        // Auto-show popover briefly on launch so user sees the app on their menu bar
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            if let button = self?.statusItem.button, let popover = self?.popover, !popover.isShown {
+                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+                NSApp.activate(ignoringOtherApps: true)
             }
         }
     }

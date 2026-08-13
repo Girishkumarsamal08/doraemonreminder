@@ -2,7 +2,13 @@
   "images" : [
     {
       "filename" : "menuBarIcon.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "menuBarIcon@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
     }
   ],
   "info" : {
