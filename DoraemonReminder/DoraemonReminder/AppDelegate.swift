@@ -16,17 +16,42 @@ class StatusBarController: NSObject, NSPopoverDelegate {
         if let button = statusItem.button {
             button.toolTip = "Doraemon Reminder"
             
-            let config = NSImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
-            if let image = NSImage(systemSymbolName: "bell.fill", accessibilityDescription: "Doraemon Reminder")?.withSymbolConfiguration(config) {
-                image.isTemplate = true
-                button.image = image
+            var icon: NSImage?
+            if let resourcePath = Bundle.main.resourcePath {
+                let paths = [
+                    "\(resourcePath)/doraemon_bell_clean@2x.png",
+                    "\(resourcePath)/doraemon_bell_clean.png",
+                    "\(resourcePath)/doraemon_bell@2x.png",
+                    "\(resourcePath)/doraemon_bell.png",
+                    "\(resourcePath)/menuBarIcon@2x.png",
+                    "\(resourcePath)/menuBarIcon.png"
+                ]
+                for path in paths {
+                    if FileManager.default.fileExists(atPath: path), let img = NSImage(contentsOfFile: path) {
+                        icon = img
+                        break
+                    }
+                }
+            }
+            if icon == nil {
+                icon = NSImage(named: "menuBarIcon") ?? NSImage(named: "doraemon_bell_clean")
+            }
+            
+            if let icon = icon {
+                icon.isTemplate = false // Keep the colorful Doraemon Bell
+                icon.size = NSSize(width: 20, height: 20)
+                button.image = icon
+                button.imageScaling = .scaleProportionallyDown
                 button.imagePosition = .imageOnly
-            } else if let custom = NSImage(named: "menuBarIcon") {
-                custom.isTemplate = true
-                custom.size = NSSize(width: 18, height: 18)
-                button.image = custom
             } else {
-                button.title = "🔔"
+                let config = NSImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
+                if let sfBell = NSImage(systemSymbolName: "bell.fill", accessibilityDescription: "Doraemon Reminder")?.withSymbolConfiguration(config) {
+                    sfBell.isTemplate = true
+                    button.image = sfBell
+                    button.imagePosition = .imageOnly
+                } else {
+                    button.title = "🔔"
+                }
             }
             
             button.target = self
