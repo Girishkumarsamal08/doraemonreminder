@@ -7,7 +7,7 @@
     <title>Doraeminder — Magical reminders from your favorite robot cat</title>
     <meta name="description"
         content="A free macOS menu bar reminder app featuring Doraemon. Set reminders and let Doraemon fly onto your screen to deliver them.">
-    <meta property="og:title" content="Doraemon Reminder — Magical reminders from your favorite robot cat">
+    <meta property="og:title" content="Doraeminder — Magical reminders from your favorite robot cat">
     <meta property="og:description"
         content="A free macOS menu bar reminder app featuring Doraemon. Set reminders and let Doraemon fly onto your screen to deliver them.">
     <link rel="icon" href="images/doraemon face.jpg" type="image/jpeg">
@@ -451,7 +451,7 @@
             if ('Notification' in window) {
                 Notification.requestPermission().then(function (permission) {
                     if (permission === 'granted') {
-                        new Notification('Doraemon Reminder 🔔', {
+                        new Notification('Doraemon Reminder', {
                             body: 'Time to take a break! ☕',
                             icon: 'images/doraemon.webp'
                         });

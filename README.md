@@ -2,7 +2,7 @@
 
   <img src="images/doraemon.webp" alt="Doraemon Reminder" width="160" />
 
-  # Doraemon Reminder 🔔
+  # Doraemon Reminder
 
   **Magical reminders from your favorite robot cat — right on your macOS menu bar!**
 

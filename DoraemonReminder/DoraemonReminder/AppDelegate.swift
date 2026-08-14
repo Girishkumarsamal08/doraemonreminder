@@ -26,8 +26,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 iconImage = img
             } else if let resourcePath = Bundle.main.resourcePath {
                 let paths = [
-                    "\(resourcePath)/menuBarIcon.png",
                     "\(resourcePath)/menuBarIcon@2x.png",
+                    "\(resourcePath)/menuBarIcon.png",
+                    "\(resourcePath)/doraemon _bell.png",
                     "\(resourcePath)/doraemon_bell.png"
                 ]
                 for path in paths {
@@ -43,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 icon.size = NSSize(width: 18, height: 18)
                 button.image = icon
             } else {
-                button.title = "🔔"
+                button.title = "Doraemon"
             }
             
             button.action = #selector(togglePopover)
