@@ -4,9 +4,9 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Properties
-    private var statusItem: NSStatusItem!
-    private var popover: NSPopover!
-    private var popoverViewController: ReminderPopoverViewController!
+    var statusItem: NSStatusItem!
+    var popover: NSPopover!
+    var popoverViewController: ReminderPopoverViewController!
     
     // MARK: - App Lifecycle
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -20,37 +20,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Hide dock icon and run purely as menu bar accessory
         NSApp.setActivationPolicy(.accessory)
         
-        // Setup status bar item
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        // Setup status bar item with squareLength
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         
         if let button = statusItem.button {
             button.toolTip = "Doraemon Reminder"
             
-            // Load template bell icon
-            var icon: NSImage?
-            if let resourcePath = Bundle.main.resourcePath {
-                let paths = [
-                    "\(resourcePath)/menuBarIcon@2x.png",
-                    "\(resourcePath)/menuBarIcon.png",
-                    "\(resourcePath)/doraemon_bell@2x.png",
-                    "\(resourcePath)/doraemon_bell.png"
-                ]
-                for path in paths {
-                    if FileManager.default.fileExists(atPath: path), let img = NSImage(contentsOfFile: path) {
-                        icon = img
-                        break
-                    }
-                }
-            }
-            if icon == nil {
-                icon = NSImage(named: "menuBarIcon")
-            }
-            if icon == nil {
-                icon = NSImage(systemSymbolName: "bell.fill", accessibilityDescription: "Doraemon Reminder")
+            // Prefer native SF Symbol bell for guaranteed system rendering
+            let config = NSImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
+            var icon = NSImage(systemSymbolName: "bell.fill", accessibilityDescription: "Doraemon Reminder")?.withSymbolConfiguration(config)
+            
+            if icon == nil, let customImg = NSImage(named: "menuBarIcon") {
+                icon = customImg
             }
             
             if let icon = icon {
-                icon.isTemplate = true // macOS native auto-tint (crisp white in dark mode, charcoal in light mode)
+                icon.isTemplate = true
                 icon.size = NSSize(width: 18, height: 18)
                 button.image = icon
                 button.imagePosition = .imageOnly
@@ -83,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     // MARK: - Popover Actions
-    @objc private func showPopover() {
+    @objc func showPopover() {
         guard let button = statusItem?.button else { return }
         if !popover.isShown {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
@@ -91,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
     
-    @objc private func togglePopover() {
+    @objc func togglePopover() {
         guard let button = statusItem?.button else { return }
         
         if popover.isShown {
