@@ -20,31 +20,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             button.toolTip = "Doraemon Reminder"
             
-            // Try loading menu bar bell icon from asset catalog or resource bundle
+            // Load custom Doraemon Bell icon from resource bundle or asset catalog
             var iconImage: NSImage?
-            if let img = NSImage(named: "menuBarIcon") {
-                iconImage = img
-            } else if let resourcePath = Bundle.main.resourcePath {
+            if let resourcePath = Bundle.main.resourcePath {
                 let paths = [
+                    "\(resourcePath)/doraemon_bell@2x.png",
+                    "\(resourcePath)/doraemon_bell.png",
                     "\(resourcePath)/menuBarIcon@2x.png",
                     "\(resourcePath)/menuBarIcon.png",
-                    "\(resourcePath)/doraemon _bell.png",
-                    "\(resourcePath)/doraemon_bell.png"
+                    "\(resourcePath)/doraemon _bell.png"
                 ]
                 for path in paths {
-                    if let img = NSImage(contentsOfFile: path) {
+                    if FileManager.default.fileExists(atPath: path), let img = NSImage(contentsOfFile: path) {
                         iconImage = img
                         break
                     }
                 }
             }
+            if iconImage == nil {
+                iconImage = NSImage(named: "menuBarIcon") ?? NSImage(named: "doraemon_bell")
+            }
             
             if let icon = iconImage {
-                icon.isTemplate = true
-                icon.size = NSSize(width: 18, height: 18)
+                icon.isTemplate = false // Keep the authentic colorful Doraemon yellow bell
+                icon.size = NSSize(width: 20, height: 20)
                 button.image = icon
+            } else if let sfBell = NSImage(systemSymbolName: "bell.fill", accessibilityDescription: "Doraemon Reminder") {
+                sfBell.isTemplate = true
+                button.image = sfBell
             } else {
-                button.title = "Doraemon"
+                button.title = "🔔"
             }
             
             button.action = #selector(togglePopover)
