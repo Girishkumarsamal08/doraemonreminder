@@ -80,6 +80,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    // MARK: - App Reopen Handler (Finder / Launchpad / Spotlight)
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        togglePopover()
+        return true
+    }
+    
     // MARK: - Popover Toggle
     @objc private func togglePopover() {
         guard let button = statusItem.button else { return }
