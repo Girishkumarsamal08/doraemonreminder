@@ -54,12 +54,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             if let icon = iconImage {
                 icon.isTemplate = false // Keep authentic Doraemon yellow bell colors
-                icon.size = NSSize(width: 18, height: 18)
+                icon.size = NSSize(width: 20, height: 20)
                 button.image = icon
+                button.imageScaling = .scaleProportionallyDown
                 button.imagePosition = .imageOnly
             } else if let sfBell = NSImage(systemSymbolName: "bell.fill", accessibilityDescription: "Doraemon Reminder") {
                 sfBell.isTemplate = true
                 button.image = sfBell
+                button.imageScaling = .scaleProportionallyDown
                 button.imagePosition = .imageOnly
             } else {
                 button.title = "🔔"
@@ -98,17 +100,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - App Reopen Handler (Finder / Launchpad / Spotlight)
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        togglePopover()
+        showPopover()
         return true
     }
     
     // MARK: - Popover Actions
-    private func showPopover() {
+    @objc private func showPopover() {
         guard let button = statusItem?.button else { return }
         if !popover.isShown {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-            NSApp.activate(ignoringOtherApps: true)
         }
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     @objc private func togglePopover() {
